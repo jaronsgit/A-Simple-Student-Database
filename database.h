@@ -22,6 +22,8 @@ void readDatabase(const std::string fileName);
 void saveDatabase(const std::string fileName);
 void displayStudentData(const std::string studentNumber);
 void gradeStudent(const std::string studentNumber);
+Student parseFileLine(const std::string line);
+std::string serialiseStudent(const Student tempStudent);
 
 } // namespace CHNJAR003
 
