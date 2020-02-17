@@ -35,6 +35,7 @@ int main(void)
 
         CHNJAR003::Student tempStudent; //temporary Student structure to hold details of one student record.
         std::string fileName;
+        std::string studentNumber;
 
         switch (entered)
         {
@@ -74,6 +75,28 @@ int main(void)
             PRINT("\nFunction saveDatabase() called.");
 
             break;
+
+        case '3':
+            PRINT("\nPlease enter student number of desired student's record: ");
+            std::cin >> studentNumber;
+            CHNJAR003::Student *temp = CHNJAR003::displayStudentData(studentNumber);
+
+            if (temp)
+            { //If temp is not null
+                CHNJAR003::Student record = *temp;
+                PRINT("First Name: " + record.fName);
+                PRINT("Last Name: " + record.sName);
+                PRINT("Student Number: " + record.studentNumber);
+                PRINT("Class Record: " + record.classRecord);
+            }
+            else
+            {
+                PRINT("Student record could not be found.");
+            }
+            break;
+
+        case '4':
+            PRINT("\nPlease enter student number of desired student's average class record: ")
         }
 
         if (entered == 'q')
