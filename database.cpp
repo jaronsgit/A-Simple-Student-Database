@@ -70,6 +70,18 @@ void CHNJAR003::saveDatabase(const std::string fileName)
     }
 }
 
+CHNJAR003::Student CHNJAR003::displayStudentData(const std::string studentNumber)
+{
+
+    for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
+    {
+        if (temp.studentNumber == studentNumber)
+        {
+            return temp;
+        }
+    }
+}
+
 CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
 {
 
