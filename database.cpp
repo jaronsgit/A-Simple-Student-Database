@@ -87,6 +87,37 @@ std::string CHNJAR003::displayStudentData(const std::string studentNumber)
     return "Student record could not be found.";
 }
 
+float CHNJAR003::gradeStudent(const std::string studentNumber)
+{
+
+    for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
+    {
+        if (temp.studentNumber == studentNumber)
+        {
+
+            std::istringstream iss(temp.classRecord);
+            std::string token;
+
+            std::vector<std::string> marks;
+
+            while (std::getline(iss, token, ' '))
+            {
+                marks.push_back(token);
+            }
+
+            float average;
+
+            for (std::string mark : marks)
+            {
+                average += atof(mark.c_str());
+            }
+
+            return average / marks.size();
+        }
+    }
+    return -1;
+}
+
 CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
 {
 
