@@ -42,8 +42,12 @@ void CHNJAR003::readDatabase(const std::string fileName)
         PRINT("All the records are:\n")
         for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
         {
-            PRINT(temp.fName + "\n");
+            PRINT("\nFirst Name:\t" + temp.fName +
+                   "\nLast Name:\t" + temp.sName +
+                   "\nStudent Number:\t" + temp.studentNumber +
+                   "\nClass Record:\t" + temp.classRecord+ "\n\n");
         }
+        PRINT("\n")
     }
 
     databaseFile.close();
