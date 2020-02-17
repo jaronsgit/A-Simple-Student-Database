@@ -31,6 +31,8 @@ void CHNJAR003::readDatabase(const std::string fileName)
     else
     {
 
+        CHNJAR003::StudentRecords.clear();
+
         while (!databaseFile.eof())
         {
             std::string line;
