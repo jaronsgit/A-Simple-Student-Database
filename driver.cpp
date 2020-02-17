@@ -87,6 +87,16 @@ int main(void)
         case '4':
             PRINT("\nPlease enter student number of desired student's average class record: ");
             std::cin >> studentNumber;
+            float average = CHNJAR003::gradeStudent(studentNumber);
+            if (average != -1)
+            {
+                PRINT("Average mark for " + studentNumber + ": " + std::to_string(average) + "\n\n");
+            }
+            else
+            {
+                PRINT("Student record could not be found.");
+            }
+
             break;
         }
 
