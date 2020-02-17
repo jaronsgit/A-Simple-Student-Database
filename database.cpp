@@ -40,7 +40,7 @@ void CHNJAR003::readDatabase(const std::string fileName)
         PRINT("All the records are:\n")
         for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
         {
-            PRINT(temp.fName);
+            PRINT(temp.fName + "\n");
         }
     }
 
@@ -70,18 +70,21 @@ void CHNJAR003::saveDatabase(const std::string fileName)
     }
 }
 
-CHNJAR003::Student *CHNJAR003::displayStudentData(const std::string studentNumber)
+std::string CHNJAR003::displayStudentData(const std::string studentNumber)
 {
 
     for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
     {
         if (temp.studentNumber == studentNumber)
         {
-            return &temp;
+            return "\nFirst Name:\t" + temp.fName +
+                   "\nLast Name:\t" + temp.sName +
+                   "\nStudent Number:\t" + temp.studentNumber +
+                   "\nClass Record:\t" + temp.classRecord + "\n\n";
         }
     }
 
-    return NULL;
+    return "Student record could not be found.";
 }
 
 CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
