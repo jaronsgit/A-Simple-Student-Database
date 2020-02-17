@@ -51,10 +51,11 @@ int main(void)
             std::cin >> tempStudent.studentNumber;
             PRINT("\nEnter class record (e.g. 78 67 89 91): ");
             //std::cin >> tempStudent.classRecord;
-            std::getline(std::cin, tempStudent.classRecord);
+            std::cin.ignore();
+            getline(std::cin, tempStudent.classRecord);
 
             CHNJAR003::addStudent(tempStudent.fName, tempStudent.sName, tempStudent.studentNumber, tempStudent.classRecord);
-            PRINT("Function addStudent() called.");
+            PRINT("Function addStudent() called.\n\n");
 
             break;
         case '1':
@@ -62,7 +63,7 @@ int main(void)
             //std::cout << "\nPlease enter database file name: ";
             PRINT("\nPlease enter database file name: ");
             std::cin >> fileName;
-            CHNJAR003::readDatabase("hello.txt");
+            CHNJAR003::readDatabase(fileName);
             std::cout << "\nFunction readDatabase() called with file name: " << fileName << "\n";
 
             break;
@@ -72,7 +73,7 @@ int main(void)
             PRINT("\nPlease enter file name: ");
             std::cin >> fileName;
             CHNJAR003::saveDatabase(fileName);
-            PRINT("\nFunction saveDatabase() called.");
+            PRINT("\nFunction saveDatabase() called.\n");
 
             break;
 
@@ -87,6 +88,7 @@ int main(void)
         case '4':
             PRINT("\nPlease enter student number of desired student's average class record: ");
             std::cin >> studentNumber;
+            PRINT("\nFunction gradeStudent() called.\n")
             float average = CHNJAR003::gradeStudent(studentNumber);
             if (average != -1)
             {
@@ -94,7 +96,7 @@ int main(void)
             }
             else
             {
-                PRINT("Student record could not be found.");
+                PRINT("Student record could not be found.\n");
             }
 
             break;
