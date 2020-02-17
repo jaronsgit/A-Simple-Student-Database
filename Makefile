@@ -1,8 +1,6 @@
-# This is a Makefile comment
 CC=g++         # the compiler
 LIBS=-lm       # the libraries we will ref
 
-# Need object files Fib.o and FibDriver.o to create exe fibonacci 
 databaseDriver: database.o driver.o
 	$(CC) driver.o database.o -o databaseDriver $(LIBS)
 
@@ -10,7 +8,6 @@ databaseDriver: database.o driver.o
 %.o : %.cpp   # $< is the first dependancy and $@ is the target
 	$(CC) -c $< -o $@
    
-# other rules; invoked by make clean etc 
 
 # deletes all the object code files
 clean:
