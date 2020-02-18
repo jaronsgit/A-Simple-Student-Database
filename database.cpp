@@ -105,10 +105,16 @@ void CHNJAR003::saveDatabase(const std::string fileName)
 
 std::string CHNJAR003::displayStudentData(const std::string studentNumber)
 {
+    std::string studentNumberLowerCase = studentNumber;
+    std::transform(studentNumberLowerCase.begin(), studentNumberLowerCase.end(), studentNumberLowerCase.begin(), ::tolower);
 
     for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
     {
-        if (temp.studentNumber == studentNumber)
+
+        std::string tempStudentNoLowerCase = temp.studentNumber;
+        std::transform(tempStudentNoLowerCase.begin(), tempStudentNoLowerCase.end(), tempStudentNoLowerCase.begin(), ::tolower);
+
+        if (studentNumberLowerCase.compare(tempStudentNoLowerCase) == 0) //if the student numbers match
         {
             return "\nFirst Name:\t" + temp.fName +
                    "\nLast Name:\t" + temp.sName +
@@ -117,15 +123,20 @@ std::string CHNJAR003::displayStudentData(const std::string studentNumber)
         }
     }
 
-    return "Student record could not be found.";
+    return "Student record could not be found.\n";
 }
 
 float CHNJAR003::gradeStudent(const std::string studentNumber)
 {
+    std::string studentNumberLowerCase = studentNumber;
+    std::transform(studentNumberLowerCase.begin(), studentNumberLowerCase.end(), studentNumberLowerCase.begin(), ::tolower);
 
     for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
     {
-        if (temp.studentNumber == studentNumber)
+        std::string tempStudentNoLowerCase = temp.studentNumber;
+        std::transform(tempStudentNoLowerCase.begin(), tempStudentNoLowerCase.end(), tempStudentNoLowerCase.begin(), ::tolower);
+
+        if (studentNumberLowerCase.compare(tempStudentNoLowerCase) == 0) //if the student numbers match
         {
 
             std::istringstream iss(temp.classRecord);
