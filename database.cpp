@@ -151,6 +151,7 @@ float CHNJAR003::gradeStudent(const std::string studentNumber)
     return -1;
 }
 
+//Function to process a student record line from the textfile and resolve the record into its individual data parts
 CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
 {
 
@@ -161,6 +162,7 @@ CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
 
     std::vector<std::string> tokens;
 
+    //Break up the line delimited by commas
     while (std::getline(iss, token, ','))
     {
         tokens.push_back(token);
@@ -185,6 +187,7 @@ CHNJAR003::Student CHNJAR003::parseFileLine(const std::string line)
     return temp;
 }
 
+//Function to process a Student record from its struct form into a string that can be stored in a textfile.
 std::string CHNJAR003::serialiseStudent(const CHNJAR003::Student tempStudent)
 {
     std::string serialOut;
