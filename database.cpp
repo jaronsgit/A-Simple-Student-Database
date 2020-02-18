@@ -2,20 +2,44 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #define PRINT(x) std::cout << x;
 
 std::vector<CHNJAR003::Student> CHNJAR003::StudentRecords;
 
 void CHNJAR003::addStudent(const std::string fName, const std::string sName, const std::string studentNumber, const std::string classRecord)
 {
-    CHNJAR003::Student tempRecord;
 
-    tempRecord.fName = fName;
-    tempRecord.sName = sName;
-    tempRecord.studentNumber = studentNumber;
-    tempRecord.classRecord = classRecord;
+    bool recordAlreadyExists = false;
 
-    CHNJAR003::StudentRecords.push_back(tempRecord);
+    //iterate through the existing records to check whether it exists already
+    for (auto &aRecord : CHNJAR003::StudentRecords)
+    {
+        std::string tempRecordStudentNumber = aRecord.studentNumber;
+        std::transform(tempRecordStudentNumber.begin(), tempRecordStudentNumber.end(), tempRecordStudentNumber.begin(), ::tolower);
+        std::string newRecordStudentNumber = studentNumber;
+        std::transform(newRecordStudentNumber.begin(), newRecordStudentNumber.end(), newRecordStudentNumber.begin(), ::tolower);
+
+        if (tempRecordStudentNumber.compare(newRecordStudentNumber) == 0) //if the student record already exists, replace it
+        {
+            recordAlreadyExists = true;
+            aRecord.fName = fName;
+            aRecord.sName = sName;
+            aRecord.classRecord = classRecord;
+        }
+    }
+    if (!recordAlreadyExists) //if the record does not exist, add it
+    {
+        CHNJAR003::Student tempRecord;
+        //entered details stored in temporary object to be added
+        tempRecord.fName = fName;
+        tempRecord.sName = sName;
+        tempRecord.studentNumber = studentNumber;
+        tempRecord.classRecord = classRecord;
+
+        //add the record
+        CHNJAR003::StudentRecords.push_back(tempRecord);
+    }
 }
 
 void CHNJAR003::readDatabase(const std::string fileName)
@@ -37,15 +61,18 @@ void CHNJAR003::readDatabase(const std::string fileName)
         {
             std::string line;
             getline(databaseFile, line);
-            CHNJAR003::StudentRecords.push_back(parseFileLine(line));
+            if (line.size() > 1) //line is not empty
+            {
+                CHNJAR003::StudentRecords.push_back(parseFileLine(line));
+            }
         }
         PRINT("All the records are:\n")
         for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
         {
             PRINT("\nFirst Name:\t" + temp.fName +
-                   "\nLast Name:\t" + temp.sName +
-                   "\nStudent Number:\t" + temp.studentNumber +
-                   "\nClass Record:\t" + temp.classRecord+ "\n\n");
+                  "\nLast Name:\t" + temp.sName +
+                  "\nStudent Number:\t" + temp.studentNumber +
+                  "\nClass Record:\t" + temp.classRecord + "\n\n");
         }
         PRINT("\n")
     }
@@ -69,7 +96,7 @@ void CHNJAR003::saveDatabase(const std::string fileName)
 
         for (CHNJAR003::Student temp : CHNJAR003::StudentRecords)
         {
-            databaseFile << serialiseStudent(temp) << "\n";
+            databaseFile << serialiseStudent(temp) << std::endl;
         }
 
         databaseFile.close();
