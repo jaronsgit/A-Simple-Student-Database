@@ -2,11 +2,11 @@ CC=g++         # the compiler
 LIBS=-lm       # the libraries we will ref
 
 databaseDriver: database.o driver.o
-	$(CC) driver.o database.o -o databaseDriver $(LIBS)
+	$(CC) driver.o database.o -o databaseDriver -std=c++11 $(LIBS)
 
 # Implicit pattern rule for compiling object files
 %.o : %.cpp   # $< is the first dependancy and $@ is the target
-	$(CC) -c $< -o $@
+	$(CC) -c $< -o -std=c++11 $@
    
 
 # deletes all the object code files
