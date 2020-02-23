@@ -6,7 +6,7 @@ databaseDriver: database.o driver.o
 
 # Implicit pattern rule for compiling object files
 %.o : %.cpp   # $< is the first dependancy and $@ is the target
-	$(CC) -c $< -o -std=c++11 $@
+	$(CC) -c $< -o $@ -std=c++11
    
 
 # deletes all the object code files
